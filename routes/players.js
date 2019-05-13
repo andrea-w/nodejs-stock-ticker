@@ -9,6 +9,7 @@ router.route('/')
 router.route('/:playerId')
     .get(helpers.getPlayer)
     .put(helpers.updatePlayer)
+    .delete(helpers.deletePlayer)
 
 
 module.exports = router;

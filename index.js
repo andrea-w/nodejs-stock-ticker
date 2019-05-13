@@ -10,7 +10,9 @@ var portfolioRoutes = require('./routes/portfolios');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/views'));
-    
+app.use(express.static(__dirname + '/styles'));
+app.use(express.static(__dirname + '/scripts'));
+
 app.get('/', function(req, res) {
     res.sendFile("index.html");
 });

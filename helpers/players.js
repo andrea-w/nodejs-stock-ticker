@@ -39,3 +39,13 @@ exports.updatePlayer = function(req, res) {
         res.send(err);
     });
 }
+
+exports.deletePlayer = function(req, res) {
+    db.Players.remove({_id: req.params.playerId})
+    .then(function() {
+        res.json({message: "Player has been deleted."})
+    })
+    .catch(function(err) {
+        res.json({message: err})
+    })
+}
