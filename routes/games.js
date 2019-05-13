@@ -1,25 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../models');
+var helpers = require("../helpers/games");
 
-router.get('/', function(req, res) {
-    db.Games.find()
-    .then(function(games) {
-        res.json(games);
-    })
-    .catch(function(err) {
-        res.send(err);
-    });
-});
+router.route('/')
+    .get(helpers.getGames)
+    .post(helpers.createGame)
 
-router.post('/', function(req, res) {
-    db.Games.create(req.body)
-    .then(function(newGame) {
-        res.status(201).json(newGame);    
-    })
-    .catch(function(err) {
-        res.send(err);
-    })
-});
+router.route('/:gameId')
+    .get(helpers.getGame)
+    .put(helpers.updateGame)
+    .delete(helpers.deleteGame)
 
 module.exports = router;

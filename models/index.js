@@ -11,7 +11,7 @@ catch (err) {
 }
 
 
-module.exports.Portfolio = require("./portfolio");
+module.exports.Portfolios = require("./portfolio");
 module.exports.Players = require("./player");
-module.exports.Trade = require("./trade");
+module.exports.Trades = require("./trade");
 module.exports.Games = require("./game");
