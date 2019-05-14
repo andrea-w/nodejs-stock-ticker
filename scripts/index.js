@@ -1,16 +1,20 @@
-/* global $ */
-
 $(document).ready(function() {
-    $('#newPlayerUsernameInput').submit(function(event) {
-        var usernameInput = $('#newPlayerUsernameInput').username.val();
-        console.log(usernameInput);
-        $.post('/api/players', {username: usernameInput})
-        .then(function(newPlayer) {
-            console.log(newPlayer);
-            window.location.href = "joingame.html"
-        })
-        .catch(function(err) {
-            console.log(err);
-        })
-    });
+    $('#newPlayerUsernameInput').keypress(function(event) {
+        if (event.which == 13) {
+            console.log("You hit ENTER");
+            createNewPlayer();
+        }
+    })
 });
+
+function createNewPlayer() {
+    var usernameInput = $('#newPlayerUsernameInput').val();
+    $.post('/api/players', { username: usernameInput })
+    .then(function(newPlayer) {
+        console.log("New player created");
+        console.log(newPlayer);
+    })
+    .catch(function(err) {
+        console.log(err);
+    })
+}
