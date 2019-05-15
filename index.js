@@ -1,6 +1,7 @@
 var express = require('express'), 
     app = express(),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser');
     
 var playerRoutes = require('./routes/players');
 var gameRoutes = require('./routes/games');
@@ -9,6 +10,7 @@ var portfolioRoutes = require('./routes/portfolios');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use(express.static(__dirname + '/views'));
 app.use(express.static(__dirname + '/styles'));
 app.use(express.static(__dirname + '/scripts'));

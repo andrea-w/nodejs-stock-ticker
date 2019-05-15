@@ -13,7 +13,7 @@ exports.getPlayers = function(req, res) {
 exports.createPlayer = function(req, res) {
     db.Players.create(req.body)
     .then(function(newPlayer) {
-        res.status(201).json(newPlayer);    
+        res.status(201).json(newPlayer);
     })
     .catch(function(err) {
         res.send(err);
