@@ -13,8 +13,8 @@ function createNewPlayer(req, res) {
     .then(function(req, res) {
         console.log(res);
         
-        // create cookie for username
-        res.cookie('username', res.username, {path: '/'});
+        // create cookie for player
+        res.cookie('player', res, {path: '/'});
     })
     .catch(function(err) {
         console.log(err);

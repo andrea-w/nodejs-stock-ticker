@@ -1,3 +1,36 @@
-<h1>
-    Join a game!
-</h1>
+<head>
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+</head>
+
+<body>
+    <button type="button" id="joinGameButton" onclick="joinExistingGame()">Join an Existing Game</button><br>
+    <button type="button" id="createNewGameButton" onclick="createNewGame()">Create a New Game</button>
+
+    <div id="joinExistingDiv" style="display:none;">
+        <p>This is the join existing game div</p>
+        <ul class="games"></ul>
+    </div>
+
+    <div id="createNewDiv" style="display:none;">
+        <p>This is the div for creating a new game</p>
+        <br>
+        <form id="createNewGameForm" submit="createNewGame()">
+            <label for="gameName">Game Name</label><br>
+            <input type="text" name="gameName"/><br>
+            <label for="startingCash">Starting Cash</label><br>
+            <input type="text" name="startingCash" /><br>
+            <label for="quantityOfStartingShares">Quantity of starting shares</label><br>
+            <input type="text" name="quantityOfStartingShares" /><br>
+            <label for="endGameAt">End game at</label><br>
+            <input type="text" id="timepicker" name="endGameAt " /><br>
+            <label for="digitalDice">Digital dice</label>
+            <input type="checkbox" name="digitalDice" /><br>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    <script type="text/javascript" src="joingame.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+</body>
