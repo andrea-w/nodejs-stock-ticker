@@ -55,6 +55,10 @@ var gameSchema = new mongoose.Schema({
     },
     currentPlayerTurn: {
         type: String
+    },
+    digitalDice: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -11,6 +11,7 @@ exports.getPlayers = function(req, res) {
 }
 
 exports.createPlayer = function(req, res) {
+    console.log(req.body);
     db.Players.create(req.body)
     .then(function(newPlayer) {
         res.status(201).json(newPlayer);
@@ -41,9 +42,10 @@ exports.updatePlayer = function(req, res) {
 }
 
 exports.deletePlayer = function(req, res) {
-    db.Players.remove({_id: req.params.playerId})
+    console.log(req.params);
+    db.Players.remove({_id:req.params.playerId})
     .then(function() {
-        res.json({message: "Player has been deleted."})
+        res.status(204).json({message: "Player has been deleted."})
     })
     .catch(function(err) {
         res.json({message: err})
