@@ -12,9 +12,6 @@ function createNewPlayer() {
     $.post('/api/players/', { username: usernameInput })
     .then(function(req, res) {
         console.log(res);
-        
-        // create cookie for player
-        $.cookie('player', res, {path: '/'});
         next();
     })
     .catch(function(err) {

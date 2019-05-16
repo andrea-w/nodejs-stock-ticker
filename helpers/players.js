@@ -14,7 +14,7 @@ exports.createPlayer = function(req, res) {
     console.log(req.body);
     db.Players.create(req.body)
     .then(function(newPlayer) {
-        res.status(201).json(newPlayer);
+        res.status(201).cookie('player', newPlayer).json(newPlayer);
     })
     .catch(function(err) {
         res.send(err);

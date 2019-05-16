@@ -1,7 +1,7 @@
-var express = require('express'), 
-    app = express(),
+var express = require('express'),
     bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+    app = express();
     
 var playerRoutes = require('./routes/players');
 var gameRoutes = require('./routes/games');
