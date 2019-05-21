@@ -13,8 +13,8 @@ exports.getPlayers = function(req, res) {
 exports.createPlayer = function(req, res) {
     console.log(req.body);
     db.Players.create(req.body)
-    .then(function(newPlayer) {
-        res.status(201).cookie('player', newPlayer).json(newPlayer);
+    .then(function(data) {
+        res.json(data).status(201);
     })
     .catch(function(err) {
         res.send(err);

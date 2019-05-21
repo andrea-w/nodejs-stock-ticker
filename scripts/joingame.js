@@ -1,10 +1,17 @@
-var player;
+/* global $ */
+
+var endTime;
 
 $(document).ready(function() {
-    $('#timepicker').timepicker({ 'step': 5 });
+    $('input.timepicker').timepicker({
+        interval: 5,
+        change: function(time) {
+            endTime = time;
+        }
+    });
 
     $.getJSON("/api/games", function(req, res) {
-        player = document.cookie;
+        var player = JSON.parse(Cookies.get("player"));
         console.log(player);
         getExistingGames(res.body);
     })
@@ -18,10 +25,10 @@ $(document).ready(function() {
         $('#joinExistingDiv').hide();
         $('#createNewDiv').show();
     });
-    
-    $('#submitButton').click(function(event) {
+
+    $('#submitButton').onclick = function() {
         createNewGame();
-    })
+    }
 });
 
 function getExistingGames(res) {
@@ -33,32 +40,44 @@ function getExistingGames(res) {
 
 function createNewGame() {
     console.log("create new game function has been called");
-    
-    var name = $('#gameName').value;
-    var cash = $('#startingCash').val();
-    var shares = $('#quantityOfStartingShares').val();
-    var endTime = $('#timepicker').timepicker('getDate');
-    var digitalDice = $('#digitalDice').val();
+
+    var name = document.getElementById('gameName').value;
+    var cash = document.getElementById('startingCash').value;
+    var shares = document.getElementById('quantityOfStartingShares').value;
+    var endTime = $('timepicker').timepicker('getDate');
+    var digitalDice = document.getElementById('digitalDice').value;
 
     console.log(name, cash, shares, endTime, digitalDice);
 
     // PUT request to set player as broker
-    $.put('/api/players/' + player._id, { isBroker: true }) // not working
-        .then(function() {
-            // POST request to create new game
-            $.post('/api/games/', {
-                    "gameName": name,
-                    "endTime": endTime,
-                    "broker": player.username,
-                    "players": player,
-                    "digitalDice": digitalDice
-                })
-                .then(function() {
-                    console.log("Game created successfully");
-                })
-                .catch(function(err) {
-                    console.log(err);
-                })
+    var player = JSON.parse(Cookies.get("player"));
+    var playerId = player._id;
+    var updateData = { isBroker: true }
+    $.ajax({
+            method: 'PUT',
+            url: '/api/players/' + playerId,
+            data: updateData
+        })
+        .then(function(updatedPlayer) {
+            console.log(updatedPlayer);
+            Cookies.remove("player");
+            Cookies.set("player", updatedPlayer);
+        })
+        .catch(function(err) {
+            console.log(err);
+        })
+
+    // POST request to create new game
+    $.post('/api/games/', {
+            "gameName": name,
+            "endTime": endTime,
+            "broker": player.username,
+            "players": player,
+            "digitalDice": digitalDice
+        })
+        .then(function(data) {
+            console.log("Game created successfully");
+            console.log(data);
         })
         .catch(function(err) {
             console.log(err);
